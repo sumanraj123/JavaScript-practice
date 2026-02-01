@@ -131,3 +131,12 @@ for (const [key, val] of Object.entries(obj)) {
 }
 // "foo" 1
 // "bar" 2
+
+
+
+function fn(){
+  return
+  {}
+}
+
+console.log(fn());
