@@ -1,0 +1,117 @@
+// =====================================================
+// JavaScript Event Loop Interview Questions (Practice)
+// =====================================================
+
+/* -----------------------------------------------------
+   Question 1 — Basic Microtask vs Macrotask
+   What will be the output?
+----------------------------------------------------- */
+console.log("start");
+
+setTimeout(() => console.log("timeout"), 0);
+
+Promise.resolve().then(() => console.log("promise"));
+
+console.log("end");
+
+
+
+/* -----------------------------------------------------
+   Question 2 — Multiple Promises
+   What will be the output?
+----------------------------------------------------- */
+console.log("A");
+
+Promise.resolve().then(() => console.log("B"));
+
+Promise.resolve().then(() => {
+  console.log("C");
+  Promise.resolve().then(() => console.log("D"));
+});
+
+console.log("E");
+
+
+
+/* -----------------------------------------------------
+   Question 3 — Timeout Inside Promise
+   What will be the output?
+----------------------------------------------------- */
+console.log("1");
+
+setTimeout(() => console.log("2"), 0);
+
+Promise.resolve().then(() => {
+  console.log("3");
+  setTimeout(() => console.log("4"), 0);
+});
+
+Promise.resolve().then(() => console.log("5"));
+
+
+
+/* -----------------------------------------------------
+   Question 4 — Nested setTimeout + Promise
+   What will be the output?
+----------------------------------------------------- */
+setTimeout(() => {
+  console.log("A");
+  Promise.resolve().then(() => console.log("B"));
+}, 0);
+
+Promise.resolve().then(() => console.log("C"));
+
+setTimeout(() => console.log("D"), 0);
+
+console.log("E");
+
+
+
+/* -----------------------------------------------------
+   Question 5 — Mixed Microtasks and Macrotasks
+   What will be the output?
+----------------------------------------------------- */
+console.log("1");
+
+setTimeout(() => {
+  console.log("2");
+  Promise.resolve().then(() => console.log("3"));
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("4");
+  setTimeout(() => console.log("5"), 0);
+});
+
+console.log("6");
+
+
+
+/* -----------------------------------------------------
+   Question 6 — Microtask Starvation
+   What will be the output?
+----------------------------------------------------- */
+console.log("start");
+
+Promise.resolve().then(function repeat() {
+  console.log("micro");
+  Promise.resolve().then(repeat);
+});
+
+setTimeout(() => console.log("timeout"), 0);
+
+
+
+/* -----------------------------------------------------
+   Question 7 — async/await Microtask Behavior
+   What will be the output?
+----------------------------------------------------- */
+async function test() {
+  console.log("A");
+  await null;
+  console.log("B");
+}
+
+console.log("C");
+test();
+console.log("D");
