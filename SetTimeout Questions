@@ -1,0 +1,93 @@
+// =====================================================
+// JavaScript setTimeout Interview Questions (Practice)
+// =====================================================
+
+/* -----------------------------------------------------
+   Question 1 — setTimeout + Promise + Sync
+   What will be the output?
+----------------------------------------------------- */
+console.log("1");
+
+setTimeout(() => console.log("2"), 0);
+
+Promise.resolve().then(() => console.log("3"));
+
+console.log("4");
+
+
+
+/* -----------------------------------------------------
+   Question 2 — Closure + setTimeout
+   What will be the output?
+----------------------------------------------------- */
+function run() {
+  let x = 10;
+  setTimeout(() => console.log(x), 0);
+  x = 20;
+}
+
+run();
+
+
+
+/* -----------------------------------------------------
+   Question 3 — Timer Registration Order
+   What will be the output?
+----------------------------------------------------- */
+setTimeout(() => console.log("A"), 0);
+setTimeout(() => console.log("B"), 0);
+setTimeout(() => console.log("C"), 0);
+
+
+
+/* -----------------------------------------------------
+   Question 4 — Nested setTimeout
+   What will be the output?
+----------------------------------------------------- */
+setTimeout(() => {
+  console.log("A");
+  setTimeout(() => console.log("B"), 0);
+}, 0);
+
+setTimeout(() => console.log("C"), 0);
+
+
+
+/* -----------------------------------------------------
+   Question 5 — Blocking the Call Stack
+   What will be the output?
+----------------------------------------------------- */
+setTimeout(() => console.log("A"), 0);
+
+for (let i = 0; i < 1e9; i++) {}
+
+console.log("B");
+
+
+
+/* -----------------------------------------------------
+   Question 6 — Timer Inside Promise
+   What will be the output?
+----------------------------------------------------- */
+Promise.resolve().then(() => {
+  console.log("A");
+  setTimeout(() => console.log("B"), 0);
+});
+
+setTimeout(() => console.log("C"), 0);
+
+
+
+/* -----------------------------------------------------
+   Question 7 — async/await + setTimeout
+   What will be the output?
+----------------------------------------------------- */
+async function test() {
+  console.log("A");
+  setTimeout(() => console.log("B"), 0);
+  await null;
+  console.log("C");
+}
+
+test();
+console.log("D");
